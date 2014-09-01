@@ -128,36 +128,52 @@ class Minefield
   def adjacent_mines(row, col)
     @adjacent_mines = 0
 
-    if @minefield_rep[row + 1][col + 1] == "Mine"
-      @adjacent_mines += 1
+    if (row + 1) <= @row_count && (col + 1) <= @column_count
+      if @minefield_rep[row + 1][col + 1] == "Mine"
+        @adjacent_mines += 1
+      end
     end
 
-    if @minefield_rep[row][col + 1] == "Mine"
-      @adjacent_mines += 1
+    if (col + 1) <= @column_count
+      if @minefield_rep[row][col + 1] == "Mine"
+        @adjacent_mines += 1
+      end
     end
 
-    if @minefield_rep[row -1][col + 1] == "Mine" && (row -1) >= 0
-      @adjacent_mines += 1
+    if (row - 1) >= 0 && (col + 1) <= @column_count
+      if @minefield_rep[row -1][col + 1] == "Mine" && (row -1) >= 0
+        @adjacent_mines += 1
+      end
     end
 
-    if @minefield_rep[row + 1][col] == "Mine"
-      @adjacent_mines += 1
+    if (row + 1) <= @row_count
+      if @minefield_rep[row + 1][col] == "Mine"
+        @adjacent_mines += 1
+      end
     end
 
-    if @minefield_rep[row-1][col] == "Mine" && (row -1) >= 0
-      @adjacent_mines += 1
+    if (row - 1) >= 0
+      if @minefield_rep[row-1][col] == "Mine" && (row -1) >= 0
+        @adjacent_mines += 1
+      end
     end
 
-    if @minefield_rep[row + 1][col -1] == "Mine" && (col - 1) >=0
-      @adjacent_mines += 1
+    if (row + 1) <= @row_count && (col - 1) >= 0
+      if @minefield_rep[row + 1][col -1] == "Mine" && (col - 1) >=0
+        @adjacent_mines += 1
+      end
     end
 
-    if @minefield_rep[row][col - 1] == "Mine" && (col - 1) >=0
-      @adjacent_mines += 1
+    if (col - 1) >= 0
+      if @minefield_rep[row][col - 1] == "Mine" && (col - 1) >=0
+        @adjacent_mines += 1
+      end
     end
 
-    if @minefield_rep[row - 1][col - 1] == "Mine" && (col - 1) >=0 && (row -1) >= 0
-      @adjacent_mines += 1
+    if (row - 1) >= 0 && (col - 1) >= 0
+      if @minefield_rep[row - 1][col - 1] == "Mine" && (col - 1) >=0 && (row -1) >= 0
+        @adjacent_mines += 1
+      end
     end
     @adjacent_mines
   end
