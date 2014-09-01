@@ -33,48 +33,7 @@ class Minefield
     end
   end
 
-  def minefield_rep
-    @minefield_rep
-  end
-end
 
-  #   @adjacents_collection = adjacents_collection(@coordinate_list[0], @minefield_rep)
-  # end
-
-  #   def adjacents_collection(coordinate, minefield_rep)
-
-  #     row = coordinate[0]
-  #     column = coordinate[1]
-
-  #     @adjacent_column = []
-
-  #     if row - 1 >= 0
-  #       @adjacent_column << (row - 1)
-  #     end
-
-  #     if row  <= @row_count
-  #       @adjacent_column << (row + 1)
-  #     end
-
-  #     @adjacent_row = []
-
-  #     if column - 1 >= 0
-  #       @adjacent_row << (column - 1)
-  #     end
-
-  #     if column <= @row_count
-  #       @adjacent_row << column + 1
-  #     end
-
-  #   end
-
-  #   def adjacent_column
-  #     @adjacent_column
-  #   end
-
-  #   def adjacent_row
-  #     @adjacent_row
-  #   end
 
       # x_coordinate_adjacents = [(x_coordinate - 1), (x_coordinate), (x_coordinate + 1)]
       # y_coordinate_adjacents = [(y_coordinate -1), (y_coordinate), (y_coordinate + 1)]
@@ -95,19 +54,23 @@ end
     #     if space == :empty_space
     #       adjacent_mines = 0
     #       if row
+  def adjacents
+    @adjacents
+  end
 
 
+  def coordinate_list
+    @coordinate_list
+  end
 
-#   def coordinate_list
-#     @coordinate_list
-#   end
+  def minefield_rep
+    @minefield_rep
+  end
 
-
-
-#   def mine_count
-#     @mine_count
-#   end
-# end
+  def mine_count
+    @mine_count
+  end
+end
 
 minefield_1 = Minefield.new(20,20,50)
 
@@ -116,20 +79,15 @@ minefield_1.minefield_rep.each do |row|
   puts
 end
 
-# puts "coordinates"
-# puts
-# puts
+puts "coordinates"
+puts
+puts
 
-# minefield_1.coordinate_list.each do |coordinate|
-#   puts coordinate.to_s
-#   puts
-# end
+minefield_1.coordinate_list.each do |coordinate|
+  puts coordinate.to_s
+  puts
+end
 
-# puts "Adjacent Columns:"
 
-# puts minefield_1.adjacent_column
 
-# p "Adajcent Rows"
-
-# puts minefield_1.adjacent_row
 
