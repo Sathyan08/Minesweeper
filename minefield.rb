@@ -5,7 +5,7 @@ class Minefield
     @column_count = column_count
     @row_count = row_count
 
-    @mine_count = 10
+    @mine_count = mine_count
 
     @minefield_rep = []
 
@@ -70,7 +70,7 @@ class Minefield
         clear(row +1, col)
       end
 
-      if cell_cleared?(row - 1,col) == false && (row - 1) >=0 && @minefield_rep[row - 1] != nil
+      if cell_cleared?(row - 1,col) == false && (row - 1) >=0
         clear(row -1, col)
       end
 
@@ -87,11 +87,11 @@ class Minefield
   # Check if any cells have been uncovered that also contained a mine. This is
   # the condition used to see if the player has lost the game.
   def any_mines_detonated?
-    # if @mines_detonated.length > 0
-    #   return true
-    # end
+    if @mines_detonated.length > 0
+      return true
+    end
 
-    # false
+    false
   end
 
   # Check if all cells that don't have mines have been uncovered. This is the
@@ -109,38 +109,38 @@ class Minefield
   def adjacent_mines(row, col)
     @adjacent_mines = 0
 
-    if (row + 1) <= @row_count && (col + 1) <= @column_count && @minefield_rep[row + 1] != nil
+    if (row + 1) < @row_count && (col + 1) < @column_count
       if @minefield_rep[row + 1][col + 1] == "Mine"
         @adjacent_mines += 1
       end
     end
 
-    if (col + 1) <= @column_count && @minefield_rep[row] != nil
+    if (col + 1) < @column_count
       if @minefield_rep[row][col + 1] == "Mine"
         @adjacent_mines += 1
       end
     end
 
-    if (row - 1) >= 0 && (col + 1) <= @column_count
-      if @minefield_rep[row -1][col + 1] == "Mine" && (row -1) >= 0
+    if (row - 1) >= 0 && (col + 1) < @column_count
+      if @minefield_rep[row -1][col + 1] == "Mine"
         @adjacent_mines += 1
       end
     end
 
-    if (row + 1) < @row_count && @minefield_rep[row + 1] != nil
+    if (row + 1) < @row_count
       if @minefield_rep[row + 1][col] == "Mine"
         @adjacent_mines += 1
       end
     end
 
     if (row - 1) >= 0
-      if @minefield_rep[row-1][col] == "Mine" && (row -1) >= 0
+      if @minefield_rep[row-1][col] == "Mine"
         @adjacent_mines += 1
       end
     end
 
-    if (row + 1) <= @row_count && (col - 1) >= 0 && @minefield_rep[row + 1] != nil
-      if @minefield_rep[row + 1][col -1] == "Mine" && (col - 1) >=0
+    if (row + 1) < @row_count && (col - 1) >= 0
+      if @minefield_rep[row + 1][col -1] == "Mine"
         @adjacent_mines += 1
       end
     end
@@ -184,13 +184,13 @@ class Minefield
 
 end
 
-# minefield_1 = Minefield.new(20,20,50)
+minefield_1 = Minefield.new(20,20,50)
 
-# minefield_1.clear(0,0)
+minefield_1.clear(0,0)
 
 
-# p minefield_1.cleared_spaces
+p minefield_1.cleared_spaces
 
-# p minefield_1.cleared_spaces.length
+p minefield_1.cleared_spaces.length
 
-# p minefield_1.clear_space_counter
+p minefield_1.clear_space_counter
