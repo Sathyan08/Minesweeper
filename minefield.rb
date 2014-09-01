@@ -52,46 +52,66 @@ class Minefield
   # it should also clear any adjacent cells as well. This is the action
   # when the player clicks on the cell.
   def clear(row, col)
+
     if contains_mine?(row, col) == false
       @cleared_spaces << [row,col]
     else
       @mines_detonated << [row,col]
     end
 
-    if @adjacent_mines == 0 && cell_cleared?(row,col) == false
-      clear(row +1, col +1)
-      clear(row +1, col)
+    @cleared_spaces << [row,col]
 
-      if col -1 >= 0
-        clear(row +1, col -1)
-      end
-      clear(row, col + 1)
+    if adjacent_mines(row,col) == 0
 
-      if col -1 >= 0
-        clear(row, col - 1)
+      if cell_cleared?(row + 1, col) == false && (row + 1) <= @row_count
+        clear(row +1, col)
       end
 
-      if row -1 >= 0
-        clear(row -1, col + 1)
+      if cell_cleared?(row - 1,col) == false && (row - 1) >=0
         clear(row -1, col)
       end
 
-      if row -1 >= 0 && col -1 >= 0
-        clear(row -1, col -1)
+      if cell_cleared?(row, col + 1)== false  && (col + 1) <= @column_count
+        clear(row, col + 1)
       end
 
-
+      if cell_cleared?(row, col - 1) == false && (col - 1) >=0
+        clear(row, col - 1)
+      end
     end
+
+      # clear(row +1, col +1)
+
+      # clear(row +1, col)
+
+      # if col -1 >= 0
+      #   clear(row +1, col -1)
+      # end
+      # clear(row, col + 1)
+
+      # if col -1 >= 0
+      #   clear(row, col - 1)
+      # end
+
+      # if row -1 >= 0
+      #   clear(row -1, col + 1)
+      #   clear(row -1, col)
+      # end
+
+      # if row -1 >= 0 && col -1 >= 0
+      #   clear(row -1, col -1)
+      # end
+
   end
 
   # Check if any cells have been uncovered that also contained a mine. This is
   # the condition used to see if the player has lost the game.
   def any_mines_detonated?
-    # if @mines_detonated.length > 0
-    #   return true
-    # end
+    if @mines_detonated.length > 0
+      return true
+    end
 
-    # false
+    false
   end
 
   # Check if all cells that don't have mines have been uncovered. This is the
