@@ -55,31 +55,20 @@ class Minefield
   # it should also clear any adjacent cells as well. This is the action
   # when the player clicks on the cell.
   def clear(row, col)
+        ###make sure the space is not already cleared and on the game board.
+    if row >= 0 && row < @row_count && col >= 0  && col < @column_count && cell_cleared?(row,col) == false
 
-    if contains_mine?(row, col) == true
-      @mines_detonated << [row,col]
-    else
-      @cleared_spaces << [row,col]
-    end
-
-    # @cleared_spaces << [row,col]
-
-    if adjacent_mines(row,col) == 0
-
-      if cell_cleared?(row + 1, col) == false && (row + 1) < @row_count
-        clear(row +1, col)
+      if contains_mine?(row, col) == true
+        @mines_detonated << [row,col]
+      else
+        @cleared_spaces << [row,col]
       end
 
-      if cell_cleared?(row - 1,col) == false && (row - 1) >=0
-        clear(row -1, col)
-      end
-
-      if cell_cleared?(row, col + 1)== false  && (col + 1) < @column_count
-        clear(row, col + 1)
-      end
-
-      if cell_cleared?(row, col - 1) == false && (col - 1) >=0
-        clear(row, col - 1)
+      if adjacent_mines(row,col) == 0
+          clear(row +1, col)
+          clear(row -1, col)
+          clear(row, col + 1)
+          clear(row, col - 1)
       end
     end
   end
@@ -170,27 +159,6 @@ class Minefield
     false
   end
 
-  def minefield_rep
-    @minefield_rep
-  end
-
-  def clear_space_counter
-    @clear_space_counter
-  end
-
-  def cleared_spaces
-    @cleared_spaces.sort
-  end
-
 end
 
-minefield_1 = Minefield.new(20,20,50)
 
-minefield_1.clear(0,0)
-
-
-p minefield_1.cleared_spaces
-
-p minefield_1.cleared_spaces.length
-
-p minefield_1.clear_space_counter
